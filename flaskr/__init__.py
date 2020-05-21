@@ -5,6 +5,7 @@ from flask import Flask
 
 # $env:FLASK_APP = "flaskr"
 # $env:FLASK_ENV = "development"
+# flask init-db
 
 def create_app(test_config=None):
     # create and configure the app
@@ -32,8 +33,9 @@ def create_app(test_config=None):
     def hello():
         return 'Hello, World!'
 
-    from . import db
+    from . import db, auth
     db.init_app(app)
+    app.register_blueprint(auth.bp)
 
     return app
 
